@@ -1,5 +1,6 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const playButton = document.getElementById('playButton');
 const replayButton = document.getElementById('replayButton');
 
 // Game settings
@@ -32,6 +33,7 @@ let score = 0;
 // Event listeners for player movement
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
+playButton.addEventListener('click', startGame);
 replayButton.addEventListener('click', resetGame);
 
 function keyDownHandler(e) {
@@ -143,6 +145,12 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
+function startGame() {
+  playButton.style.display = 'none'; // Hide the play button
+  canvas.style.display = 'block'; // Show the canvas
+  gameLoop();
+}
+
 function resetGame() {
   isGameOver = false;
   score = 0;
@@ -153,6 +161,3 @@ function resetGame() {
   replayButton.style.display = 'none'; // Hide the replay button
   gameLoop();
 }
-
-// Start the game
-gameLoop();
